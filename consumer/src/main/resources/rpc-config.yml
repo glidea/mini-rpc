@@ -1,0 +1,55 @@
+## 测试某个功能的最小配置
+
+## BaseRpc、AsyncRpc、RateLimit、Fallback、CircuitBreak、Exception、ThreadModel Test Config
+#registry:
+#  address: xxxxxxxxxx:2181
+##---------------------------------------------------------------------
+
+## Compress Test Config
+#registry:
+#  address: xxxxxxxxxxxx:2181
+## 压缩仅代表发送方的单方面行为，接收方通过协议头识别发送方的行为，即是否压缩
+#compress:
+#  threshold: 10  # 故意提高触发压缩的概率
+##---------------------------------------------------------------------
+
+## Expansion Test Config
+#registry:
+#  address: xxx
+#compress:
+#  threshold: 10
+#expansion:
+#  compressor: top.glidea.interfaces.CustomCompressor
+#  serializer:
+#  load-balance:
+#  service-discovery:
+#  service-registry:
+##---------------------------------------------------------------------
+
+## LoadBalance Test Config
+#registry:
+#  address: xxxxxxxxxx:2181
+#expansion:
+##  load-balance: top.glidea.framework.cluster.loadbalance.RandomLoadBalance
+##  load-balance: top.glidea.framework.cluster.loadbalance.ConsistentHashLoadBalance
+#  load-balance: top.glidea.framework.cluster.loadbalance.RoundRobinLoadBalance
+#  compressor:
+#  serializer:
+#  service-discovery:
+#  service-registry:
+##---------------------------------------------------------------------
+
+#consumer:
+#  services:
+#    - interface: inter
+#      methods:
+#        - name: syaHello
+#          timeout: 1111
+#          retries: 1
+#        - name: xxxxdd
+#          retries: 1
+#    - interface: inteddddr
+#      methods:
+#        - name: syaHello
+#          timeout: 22221
+#          retries: 12

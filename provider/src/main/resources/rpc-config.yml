@@ -1,0 +1,59 @@
+## 测试某个功能的最小配置
+
+## BaseRpc、AsyncRpc、Compress、RateLimit、Fallback、CircuitBreak Test Config
+#registry:
+#  address: xxxxxxx
+##---------------------------------------------------------------------
+
+## Expansion Test Config
+#registry:
+#  address: xxxxxxxx
+#compress:
+#  threshold: 10
+#expansion:
+#  compressor: top.glidea.interfaces.CustomCompressor
+#  serializer:
+#  load-balance:
+#  service-discovery:
+#  service-registry:
+##---------------------------------------------------------------------
+
+## LoadBalance Test Config
+#registry:
+#  address: xxxxxxxx
+#provider:
+#  publish:
+#    port: 7004
+#  load-balance:
+#    weight: 600
+##---------------------------------------------------------------------
+
+## Exception Test Config
+#registry:
+#  address: xxxxxxxx
+#provider:
+#  exception:
+#    ignore-stack-trace: false
+#    # 若无需针对自定义RuntimeException做特殊处理，请忽略配置，默认包装成RuntimeException(e.str)，不会反序列化失败
+#    # 若做了该配置，自定义异常要像服务接口一样，放到公共包里头
+#    custom-exceptions:
+#      - top.glidea.publicinterface.CustomException
+##---------------------------------------------------------------------
+
+
+## ThreadModel Test Config
+#registry:
+#  address: xxxxxx
+#provider:
+#  enable-async: true
+#  thread-num:
+#    service: 200
+##---------------------------------------------------------------------
+
+## Retry Test Config
+#registry:
+#  address: xxxxxxx
+#provider:
+#  publish:
+#    port: 7003
+##---------------------------------------------------------------------
