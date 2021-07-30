@@ -34,7 +34,6 @@ public class Invoker {
         return rpcClient.send(request, address);
     }
 
-    @RateLimit(qps = 1)
     public Object doInvoke(RpcRequest request) throws Throwable {
         ServiceKey serviceKey = new ServiceKey(request.getInterfaceName());
         ServiceInfo serviceInfo = serviceFinder.getServiceInfo(serviceKey);
