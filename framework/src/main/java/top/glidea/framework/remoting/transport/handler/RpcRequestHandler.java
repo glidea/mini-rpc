@@ -32,9 +32,9 @@ public class RpcRequestHandler extends SimpleChannelInboundHandler<RpcRequest> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RpcRequest msg) {
         if (enableAsync) {
-            invokeServiceThreadPool.execute(() -> {
-                doBusiness(ctx, msg);
-            });
+            invokeServiceThreadPool.execute(() ->
+                    doBusiness(ctx, msg)
+            );
         } else {
             doBusiness(ctx, msg);
         }
