@@ -19,9 +19,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public void sayHello() {
         try {
-            // 触发consumer超时异常，从而重试
-            // 如果抛业务异常，不会重试
-            Thread.sleep(4000);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -34,6 +32,11 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public List<String> list() {
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Collection<String> values = db.values();
         return new ArrayList<>(values);
     }

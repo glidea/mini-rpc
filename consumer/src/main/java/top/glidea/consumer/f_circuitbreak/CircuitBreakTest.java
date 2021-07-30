@@ -11,7 +11,7 @@ import top.glidea.interfaces.TestService;
  * emmm，熔断器我也不知道啥TestCase比较合适，全面。
  * 主要靠日志，打断点吧。熔断器大体上没啥Bug了，功能基本符合预期，但不敢保证bugfree
  */
-@Component
+//@Component
 public class CircuitBreakTest implements Test {
     @RpcAutowired
     private TestService testService;
@@ -19,27 +19,19 @@ public class CircuitBreakTest implements Test {
     @Override
     public void test() throws InterruptedException {
         for (int i = 0; i < 100; i++) {
-            new Thread(() -> {
-                testService.sayHello();
-            }).start();
+            new Thread(() -> testService.sayHello()).start();
         }
         Thread.sleep(1000);
         for (int i = 0; i < 100; i++) {
-            new Thread(() -> {
-                testService.sayHello();
-            }).start();
+            new Thread(() -> testService.sayHello()).start();
         }
         Thread.sleep(3000);
         for (int i = 0; i < 100; i++) {
-            new Thread(() -> {
-                testService.sayHello();
-            }).start();
+            new Thread(() -> testService.sayHello()).start();
         }
         Thread.sleep(5000);
         for (int i = 0; i < 100; i++) {
-            new Thread(() -> {
-                testService.sayHello();
-            }).start();
+            new Thread(() -> testService.sayHello()).start();
         }
     }
 }

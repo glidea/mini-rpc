@@ -1,4 +1,4 @@
-## 测试某个功能的最小配置
+## 测试某个功能的最小配置。配置相关详见framework.common.config
 
 ## BaseRpc、AsyncRpc、Compress、RateLimit、Fallback、CircuitBreak Test Config
 #registry:
@@ -52,7 +52,7 @@
 
 ## Retry Test Config
 #registry:
-#  address: xxxxxxx
+#  address: xxxxxx:2181
 #provider:
 #  publish:
 #    port: 7003

@@ -28,7 +28,6 @@ public class RpcClient {
 
         channel.writeAndFlush(request).addListener((ChannelFutureListener) future -> {
             if (future.isSuccess()) {
-                // TODO
                 log.debug("请求已发往 [{}]", address.toString());
             } else {
                 // fail fast

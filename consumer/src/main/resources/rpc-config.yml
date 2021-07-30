@@ -1,4 +1,4 @@
-## 测试某个功能的最小配置
+## 测试某个功能的最小配置。配置相关详见framework.common.config
 
 ## BaseRpc、AsyncRpc、RateLimit、Fallback、CircuitBreak、Exception、ThreadModel Test Config
 #registry:
@@ -39,17 +39,16 @@
 #  service-registry:
 ##---------------------------------------------------------------------
 
+## Retry Test Config
+#registry:
+#  address: xxxxxxxxx:2181
 #consumer:
 #  services:
-#    - interface: inter
+#    - interface: top.glidea.interfaces.TestService
 #      methods:
-#        - name: syaHello
-#          timeout: 1111
+#        - name: sayHello
+#          timeout: 10
 #          retries: 1
-#        - name: xxxxdd
-#          retries: 1
-#    - interface: inteddddr
-#      methods:
-#        - name: syaHello
-#          timeout: 22221
-#          retries: 12
+#        - name: list
+#          retries: 0
+##---------------------------------------------------------------------

@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Slf4j
-@RpcService(interfaceClass = TestService.class)
+//@RpcService(interfaceClass = TestService.class)
 public class TestServiceImpl implements TestService {
     private Map<Integer, String> db = new ConcurrentHashMap<>();
 

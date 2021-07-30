@@ -50,7 +50,10 @@ public class Invoker {
                 if (address == null) {
                     break;
                 }
-                log.debug("已选择 [{}] 作为服务 [{}] 的 Provider", address.toString(), serviceKey.toString());
+                if (i > 0) {
+                    log.debug("开始第 {} 次重试。请求 {}#{}", i, serviceKey.toString(), request.getMethodName());
+                }
+                log.debug("已选择 [{}] 作为服务 [{}] 的 Provider。准备发起请求", address.toString(), serviceKey.toString());
                 excludeAddresses.add(address);
                 CompletableFuture<Object> requestFuture = rpcClient.send(request, address);
                 // wait and get response
