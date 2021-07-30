@@ -12,6 +12,7 @@ import top.glidea.framework.remoting.transport.protocol.bodybean.RpcRequest;
 import top.glidea.framework.remoting.transport.protocol.bodybean.RpcResponse;
 import top.glidea.framework.common.factory.RpcServiceFactory;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -52,7 +53,7 @@ public class RpcRequestHandler extends SimpleChannelInboundHandler<RpcRequest> {
             response.setReturnValue(invoke);
 
         } catch (Throwable e) {
-            Throwable cause = e.getCause();  // get cause from InvocationTargetException
+            Throwable cause = e instanceof InvocationTargetException ? e.getCause() : e;
             log.warn("[{}] 的业务请求，抛出异常", ctx.channel().remoteAddress(), cause);
             Throwable ex = exceptionFilter.doFilter(method, cause);
             response.setExceptionValue(ex);
