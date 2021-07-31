@@ -8,7 +8,7 @@ import java.util.List;
  * 起因是想给解压缩分配内存，写完才想到ThreadLocal...
  */
 @Deprecated
-public class ByteReuseUtil {
+public class ByteReuseUtils {
     private static List<byte[]> bufferPool = new ArrayList<>();
     private static int allocedCap = 0;
     private static final int MAX_CAP = 30;
@@ -32,7 +32,7 @@ public class ByteReuseUtil {
          */
         while (bufferPool.size() == 0) {
             try {
-                ByteReuseUtil.class.wait();
+                ByteReuseUtils.class.wait();
             } catch (InterruptedException e) {
                 throw new RuntimeException("buffer分配失败", e);
             }
@@ -42,6 +42,6 @@ public class ByteReuseUtil {
 
     public static synchronized void givenBack(byte[] bytes) {
         bufferPool.add(bytes);
-        ByteReuseUtil.class.notifyAll();
+        ByteReuseUtils.class.notifyAll();
     }
 }

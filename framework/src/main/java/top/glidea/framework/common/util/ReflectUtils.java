@@ -10,7 +10,7 @@ import java.lang.reflect.Modifier;
 import java.util.Map;
 
 @Slf4j
-public class ReflectUtil {
+public class ReflectUtils {
 
     public static <T> T mapToObject(Map map, Class<T> beanClass) {
         if (map == null) {

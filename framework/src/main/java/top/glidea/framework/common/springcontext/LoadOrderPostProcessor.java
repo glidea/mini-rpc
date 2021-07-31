@@ -1,4 +1,4 @@
-package top.glidea.framework.common;
+package top.glidea.framework.common.springcontext;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;

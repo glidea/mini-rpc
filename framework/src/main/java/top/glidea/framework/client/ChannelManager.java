@@ -1,4 +1,4 @@
-package top.glidea.framework.remoting.transport.transporter;
+package top.glidea.framework.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -13,7 +13,7 @@ import top.glidea.framework.common.factory.SingletonFactory;
 import top.glidea.framework.common.exception.RpcException;
 import top.glidea.framework.common.pojo.Address;
 import top.glidea.framework.remoting.transport.handler.OrphanExceptionHandler;
-import top.glidea.framework.remoting.transport.handler.RpcResponseHandler;
+import top.glidea.framework.client.handler.RpcResponseHandler;
 import top.glidea.framework.remoting.transport.protocol.codec.MessageCodec;
 import top.glidea.framework.remoting.transport.protocol.codec.ProtocolFrameDecoder;
 import top.glidea.framework.remoting.transport.handler.WriteIdleEventHandler;
@@ -35,7 +35,7 @@ public class ChannelManager {
         bootstrap.option(ChannelOption.TCP_NODELAY, true);
         bootstrap.handler(new ChannelInitializer<SocketChannel>() {
             @Override
-            protected void initChannel(SocketChannel ch) throws Exception {
+            protected void initChannel(SocketChannel ch) {
                 ch.pipeline()
                         .addLast(new ProtocolFrameDecoder())
                         .addLast(loggingHandler)

@@ -5,8 +5,8 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 import org.apache.zookeeper.KeeperException;
-import top.glidea.framework.common.Constants;
-import top.glidea.framework.common.util.LockUtil;
+import top.glidea.framework.common.config.Constants;
+import top.glidea.framework.common.util.LockUtils;
 import top.glidea.framework.common.pojo.ProviderInfo;
 import top.glidea.framework.common.pojo.ServiceKey;
 
@@ -37,7 +37,7 @@ public class ZkServiceDiscovery implements ServiceDiscovery {
         if (!providerInfoMap.containsKey(serviceKey)) {
             // 考虑到serviceKey有被外界也作为锁的可能性，所以不考虑使用serviceKey作为锁
             // 考虑到锁粒度，使用从LockUtil#get获取的锁
-            synchronized (LockUtil.get(LOCK_MAP, serviceKey)) {
+            synchronized (LockUtils.get(LOCK_MAP, serviceKey)) {
                 if (!providerInfoMap.containsKey(serviceKey)) {
                     try {
                         List<String> providerInfoStrs = client.getChildren()

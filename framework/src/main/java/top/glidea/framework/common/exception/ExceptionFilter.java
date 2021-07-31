@@ -1,9 +1,7 @@
 package top.glidea.framework.common.exception;
 
 import top.glidea.framework.common.factory.SingletonFactory;
-import top.glidea.framework.common.exception.BusinessException;
-import top.glidea.framework.common.exception.RpcException;
-import top.glidea.framework.common.util.ExceptionUtil;
+import top.glidea.framework.common.util.ExceptionUtils;
 import top.glidea.framework.common.config.Config;
 import top.glidea.framework.common.config.ConfigOption;
 import top.glidea.framework.common.config.YmlConfig;
@@ -28,12 +26,12 @@ public class ExceptionFilter {
         // 是否清理堆栈信息
         boolean ignored = config.getNotNull(ConfigOption.PROVIDER_EXCEPTION_IGNORE_STACK_TRACE, Boolean.class);
         if (ignored) {
-            ExceptionUtil.clearStackTraceRecursive(e);
+            ExceptionUtils.clearStackTraceRecursive(e);
         }
 
         // 非业务异常，抛出
         if (!(e.getClass().equals(BusinessException.class))) {
-            return ExceptionUtil.ensureIsRpcException(e);
+            return ExceptionUtils.ensureIsRpcException(e);
         }
 
         // 原始业务异常
@@ -74,6 +72,6 @@ public class ExceptionFilter {
         }
 
         // 否则，包装成RuntimeException抛给客户端
-        return new RuntimeException(ExceptionUtil.toString(oe));
+        return new RuntimeException(ExceptionUtils.toString(oe));
     }
 }

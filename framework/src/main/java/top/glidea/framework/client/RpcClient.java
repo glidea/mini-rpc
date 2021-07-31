@@ -1,11 +1,11 @@
-package top.glidea.framework.remoting.transport.transporter;
+package top.glidea.framework.client;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import lombok.extern.slf4j.Slf4j;
 import top.glidea.framework.common.factory.SingletonFactory;
 import top.glidea.framework.common.pojo.Address;
-import top.glidea.framework.common.util.ExceptionUtil;
+import top.glidea.framework.common.util.ExceptionUtils;
 import top.glidea.framework.remoting.transport.protocol.bodybean.RpcRequest;
 import top.glidea.framework.remoting.transport.protocol.bodybean.RpcResponse;
 import top.glidea.framework.common.util.SequenceIdGenerator;
@@ -32,7 +32,7 @@ public class RpcClient {
             } else {
                 // fail fast
                 cancel(request.getSequenceId());
-                requestFuture.completeExceptionally(ExceptionUtil.ensureIsRpcException(future.cause()));
+                requestFuture.completeExceptionally(ExceptionUtils.ensureIsRpcException(future.cause()));
             }
         });
         return requestFuture;

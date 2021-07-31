@@ -2,6 +2,9 @@ package top.glidea.framework.proxy;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * 异步代理入口
+ */
 public interface RpcAsyncWrapper {
     /**
      * call method. async wait and deal return value

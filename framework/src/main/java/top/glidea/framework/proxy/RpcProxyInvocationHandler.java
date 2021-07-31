@@ -1,8 +1,8 @@
 package top.glidea.framework.proxy;
 
 import top.glidea.framework.common.factory.SingletonFactory;
-import top.glidea.framework.common.exception.RpcException;
 import top.glidea.framework.common.pojo.ServiceKey;
+import top.glidea.framework.invoke.FailoverInvoker;
 import top.glidea.framework.invoke.Invoker;
 import top.glidea.framework.remoting.transport.protocol.bodybean.RpcRequest;
 
@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
  * Rpc代理对象的InvocationHandler
  */
 public class RpcProxyInvocationHandler implements InvocationHandler {
-    private Invoker invoker = SingletonFactory.get(Invoker.class);
+    private Invoker invoker = SingletonFactory.get(FailoverInvoker.class);
     private ServiceKey serviceKey;  // 现在还莫得用
     private Class<?> serviceClass;
     private boolean enableAsync;

@@ -5,7 +5,7 @@ import top.glidea.framework.common.pojo.Address;
 import top.glidea.framework.common.pojo.ProviderInfo;
 import top.glidea.framework.common.pojo.ServiceInfo;
 import top.glidea.framework.common.pojo.ServiceKey;
-import top.glidea.framework.common.util.ReflectUtil;
+import top.glidea.framework.common.util.ReflectUtils;
 import top.glidea.framework.common.config.Config;
 import top.glidea.framework.common.config.ConfigOption;
 import top.glidea.framework.common.config.YmlConfig;
@@ -35,7 +35,7 @@ public class ServiceFinder {
             Map<String, ServiceInfo.MethodInvokeInfo> methodConfigMap = new HashMap<>();
             if (methodConfigList != null) {
                 for (Map map : methodConfigList) {
-                    ServiceInfo.MethodInvokeInfo methodInvokeInfo = ReflectUtil.mapToObject(map, ServiceInfo.MethodInvokeInfo.class);
+                    ServiceInfo.MethodInvokeInfo methodInvokeInfo = ReflectUtils.mapToObject(map, ServiceInfo.MethodInvokeInfo.class);
                     methodConfigMap.put((String) map.get("name"), methodInvokeInfo);
                 }
             }

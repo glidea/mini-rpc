@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
-public class ExceptionUtil {
+public class ExceptionUtils {
 
     public static String toString(Throwable e) {
         Writer w = new StringWriter();

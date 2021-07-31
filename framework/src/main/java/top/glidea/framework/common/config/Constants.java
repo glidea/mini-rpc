@@ -1,4 +1,4 @@
-package top.glidea.framework.common;
+package top.glidea.framework.common.config;
 
 public interface Constants {
     String ZK_REGISTER_ROOT_PATH = "/rpc-service/";

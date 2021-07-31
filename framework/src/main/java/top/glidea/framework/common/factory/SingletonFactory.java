@@ -1,6 +1,6 @@
 package top.glidea.framework.common.factory;
 
-import top.glidea.framework.common.util.LockUtil;
+import top.glidea.framework.common.util.LockUtils;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,7 +28,7 @@ public class SingletonFactory {
         if (CLASS_OBJECT_MAP.get(instanceClass) == null) {
             // 锁对象详细说明，见：ZkServiceDiscovery
             // 设想对象刚暴露出去，外部调了某个方法，这个方法上了类锁...
-            synchronized (LockUtil.get(LOCK_MAP, instanceClass)) {
+            synchronized (LockUtils.get(LOCK_MAP, instanceClass)) {
                 if (CLASS_OBJECT_MAP.get(instanceClass) == null) {
                     try {
                         Object o;

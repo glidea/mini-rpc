@@ -5,7 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import top.glidea.framework.remoting.transport.transporter.RpcServer;
+import top.glidea.framework.server.RpcServer;
 
 /**
  * 如果你想测试某个功能，找到对应的包的TestServiceImpl类，

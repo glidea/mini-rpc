@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 获取synchronize锁"对象"的工具类
  */
-public class LockUtil {
+public class LockUtils {
 
     /**
      * get one lock obj from a private ConcurrentHashMap

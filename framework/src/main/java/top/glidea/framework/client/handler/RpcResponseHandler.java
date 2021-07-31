@@ -1,11 +1,11 @@
-package top.glidea.framework.remoting.transport.handler;
+package top.glidea.framework.client.handler;
 
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 import top.glidea.framework.common.factory.SingletonFactory;
-import top.glidea.framework.remoting.transport.transporter.RpcClient;
+import top.glidea.framework.client.RpcClient;
 import top.glidea.framework.remoting.transport.protocol.bodybean.RpcResponse;
 
 @ChannelHandler.Sharable

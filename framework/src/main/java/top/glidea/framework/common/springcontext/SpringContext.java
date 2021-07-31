@@ -1,12 +1,11 @@
-package top.glidea.framework.common;
+package top.glidea.framework.common.springcontext;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import top.glidea.framework.common.util.ReflectUtil;
+import top.glidea.framework.common.util.ReflectUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
@@ -46,7 +45,7 @@ public class SpringContext implements ApplicationContextAware {
         Map<Class<?>, Object> map = new HashMap<>();
         Collection<Object> beansWithAnnotation = getBeansWithAnnotation(annotationWithInterfaceProp);
         for (Object bean : beansWithAnnotation) {
-            Object target = ReflectUtil.getTarget(bean);
+            Object target = ReflectUtils.getTarget(bean);
             if (target == null) {
                 target = bean;
             }

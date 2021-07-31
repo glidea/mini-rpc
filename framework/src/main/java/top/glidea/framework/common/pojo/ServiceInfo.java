@@ -3,7 +3,7 @@ package top.glidea.framework.common.pojo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import top.glidea.framework.common.Constants;
+import top.glidea.framework.common.config.Constants;
 
 import java.util.List;
 import java.util.Map;

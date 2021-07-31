@@ -1,4 +1,4 @@
-package top.glidea.framework.remoting.transport.transporter;
+package top.glidea.framework.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -10,11 +10,11 @@ import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.concurrent.Future;
 import lombok.extern.slf4j.Slf4j;
 import top.glidea.framework.common.factory.SingletonFactory;
-import top.glidea.framework.common.SpringContext;
+import top.glidea.framework.common.springcontext.SpringContext;
 import top.glidea.framework.common.annotation.RpcService;
 import top.glidea.framework.common.exception.RpcException;
 import top.glidea.framework.common.pojo.Address;
-import top.glidea.framework.common.util.ReflectUtil;
+import top.glidea.framework.common.util.ReflectUtils;
 import top.glidea.framework.common.config.Config;
 import top.glidea.framework.common.config.ConfigOption;
 import top.glidea.framework.common.config.YmlConfig;
@@ -27,7 +27,7 @@ import top.glidea.framework.remoting.transport.protocol.codec.ProtocolFrameDecod
 import top.glidea.framework.remoting.transport.handler.OrphanExceptionHandler;
 import top.glidea.framework.remoting.transport.handler.PingHandler;
 import top.glidea.framework.remoting.transport.handler.ReadIdleEventHandler;
-import top.glidea.framework.remoting.transport.handler.RpcRequestHandler;
+import top.glidea.framework.server.handler.RpcRequestHandler;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -128,7 +128,7 @@ public class RpcServer {
         // register every service with providerInfo
         Collection<Object> rpcServices = SpringContext.getBeansWithAnnotation(RpcService.class);
         for (Object rpcService : rpcServices) {
-            Object target = ReflectUtil.getTarget(rpcService);
+            Object target = ReflectUtils.getTarget(rpcService);
             if (target != null) {
                 // 直接从aop proxy里拿不出注解，只能推测Proxy不继承注解，并且SpringContext.getBeansWithAnnotation可以匹配Target Class
                 RpcService annotation = target.getClass().getAnnotation(RpcService.class);
@@ -141,10 +141,10 @@ public class RpcServer {
     }
 
     private void shutdown() {
-        // 先关boss,尽量拒绝请求
+        // 先关boss，尽量在更前端拒绝新请求
         Future<?> bossClose = boss.shutdownGracefully();
         if (asyncInvokeServiceThreadPool != null) {
-            // 再关业务线程池
+            // 再关业务线程池，关闭过程中默认拒绝新任务
             asyncInvokeServiceThreadPool.shutdown();
         }
         // 最后关worker，确保业务线程池处理完后，能将结果发送出去

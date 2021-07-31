@@ -5,7 +5,7 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.state.ConnectionState;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
-import top.glidea.framework.common.Constants;
+import top.glidea.framework.common.config.Constants;
 import top.glidea.framework.common.pojo.ProviderInfo;
 import top.glidea.framework.common.pojo.ServiceKey;
 

@@ -1,6 +1,6 @@
 package top.glidea.framework.common.factory;
 
-import top.glidea.framework.common.SpringContext;
+import top.glidea.framework.common.springcontext.SpringContext;
 import top.glidea.framework.common.annotation.RpcService;
 import top.glidea.framework.common.pojo.ServiceKey;
 

@@ -6,7 +6,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
 import top.glidea.framework.common.factory.SingletonFactory;
 import top.glidea.framework.common.exception.RpcException;
-import top.glidea.framework.common.util.ExceptionUtil;
+import top.glidea.framework.common.util.ExceptionUtils;
 import top.glidea.framework.common.exception.ExceptionFilter;
 
 /**
@@ -21,8 +21,8 @@ public class OrphanExceptionHandler extends ChannelInboundHandlerAdapter {
     private ExceptionFilter exceptionFilter = SingletonFactory.get(ExceptionFilter.class);
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        RpcException rpcException = ExceptionUtil.ensureIsRpcException(cause);
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+        RpcException rpcException = ExceptionUtils.ensureIsRpcException(cause);
         log.error("孤儿异常：", rpcException);
     }
 }
