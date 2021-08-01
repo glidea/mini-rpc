@@ -110,7 +110,7 @@
         private HelloService helloService;
     
         public void testSync() {
-            String echo = helloService.hi();
+            String echo = helloService.hi("myname");
         }
       
         public void testASync() {
