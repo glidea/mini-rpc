@@ -18,7 +18,6 @@ public class ProtostuffSerializer implements Serializer {
             ProtocolFrameDefinition.MAX_FRAME_LENGTH - ProtocolFrameDefinition.HEADER_LENGTH
     ));
 
-
     @Override
     public byte[] toBytes(Object obj) {
         Class<?> clazz = obj.getClass();
