@@ -1,8 +1,8 @@
 package top.glidea.framework.proxy;
 
-import top.glidea.framework.common.exception.RpcException;
 import top.glidea.framework.common.factory.SingletonFactory;
 import top.glidea.framework.common.pojo.ServiceKey;
+import top.glidea.framework.common.util.ExceptionUtils;
 import top.glidea.framework.invoke.FailoverInvoker;
 import top.glidea.framework.invoke.Invoker;
 import top.glidea.framework.remoting.transport.protocol.bodybean.RpcRequest;
@@ -50,10 +50,14 @@ public class RpcProxyInvocationHandler implements InvocationHandler {
                     .parameterTypes(method.getParameterTypes())
                     .parameterValues(args)
                     .build();
+
+            if (enableAsync) {
+                return invoker.doInvokeAsync(request);
+            }
         } catch (Throwable e) {
-            throw new RpcException(e.getMessage(), e);
+            throw ExceptionUtils.ensureIsRpcException(e);
         }
 
-        return enableAsync ? invoker.doInvokeAsync(request) : invoker.doInvoke(request);
+        return invoker.doInvoke(request);
     }
 }
