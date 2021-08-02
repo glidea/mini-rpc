@@ -1,5 +1,6 @@
 package top.glidea.framework.proxy;
 
+import top.glidea.framework.common.exception.RpcException;
 import top.glidea.framework.common.factory.SingletonFactory;
 import top.glidea.framework.common.pojo.ServiceKey;
 import top.glidea.framework.invoke.FailoverInvoker;
@@ -30,23 +31,29 @@ public class RpcProxyInvocationHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        if (enableAsync) {
-            String methodName = (String) args[0];
-            Object[] realArgs = (Object[]) args[1];
-            Class<?>[] argTypes = new Class[realArgs.length];
-            for (int i = 0; i < argTypes.length; i++) {
-                argTypes[i] = realArgs[i].getClass();
+        RpcRequest request;
+        try {
+            if (enableAsync) {
+                String methodName = (String) args[0];
+                Object[] realArgs = (Object[]) args[1];
+                Class<?>[] argTypes = new Class[realArgs.length];
+                for (int i = 0; i < argTypes.length; i++) {
+                    argTypes[i] = realArgs[i].getClass();
+                }
+                method = serviceClass.getMethod(methodName, argTypes);
+                args = realArgs;
             }
-            method = serviceClass.getMethod(methodName, argTypes);
-            args = realArgs;
+
+            request = RpcRequest.builder()
+                    .interfaceName(serviceClass.getName())
+                    .methodName(method.getName())
+                    .parameterTypes(method.getParameterTypes())
+                    .parameterValues(args)
+                    .build();
+        } catch (Throwable e) {
+            throw new RpcException(e.getMessage(), e);
         }
 
-        RpcRequest request = RpcRequest.builder()
-                .interfaceName(serviceClass.getName())
-                .methodName(method.getName())
-                .parameterTypes(method.getParameterTypes())
-                .parameterValues(args)
-                .build();
         return enableAsync ? invoker.doInvokeAsync(request) : invoker.doInvoke(request);
     }
 }
