@@ -34,7 +34,7 @@ public class ServiceInfo {
     @Setter
     @Getter
     public static class MethodInvokeInfo {
-        private long timeout = Constants.CONSUMER_GLOBAL_INVOKE_TIMOUT;
+        private long timeout = Constants.CONSUMER_GLOBAL_INVOKE_TIMEOUT;
         private int retries = Constants.CONSUMER_GLOBAL_INVOKE_RETIES;
     }
 }
