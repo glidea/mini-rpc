@@ -22,7 +22,7 @@ public class CircuitBreakerState {
     }
 
     public void open(long now) {
-        if (cut.compareAndSet(false, true)) {
+        if (cut.compareAndSet(false, true) || isHalfOpen(now)) {
             lastOpenStartTime = now;
             log.debug("熔断器状态打开，{}秒后尝试关闭（半开）。real timestamp: {}", breakTime, now);
         }
@@ -50,8 +50,6 @@ public class CircuitBreakerState {
     }
 
     public void reportClosedTry(boolean isSuccess, long now) {
-        acquireClosedThread = null;
-        tryClosing.set(false);
         if (isSuccess) {
             log.debug("尝试关闭熔断器成功");
             close0(now);
@@ -59,6 +57,8 @@ public class CircuitBreakerState {
             log.debug("尝试关闭熔断器失败，熔断器即将从半开 --> 打开");
             open(now);
         }
+        acquireClosedThread = null;
+        tryClosing.set(false);
     }
 
     private void close0(long now) {
