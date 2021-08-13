@@ -30,7 +30,7 @@
 * [注册中心](/docs/注册中心.md)
 * [异常处理](/docs/异常处理.md)
 * [重试机制](/docs/重试机制.md)
-* 熔断
+* [熔断](/docs/熔断器.md)
 * 限流
 * [Fallback](/docs/Fallback.md)
 * [协议](/docs/协议.md)
