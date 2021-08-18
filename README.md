@@ -12,7 +12,7 @@
   * **client**：为`invoke`提供异步收发请求相应的功能。以`RpcReqest`、`CompletableFuture<Object>`、`Object`为中心
   * **server**：启动`server`，并发布服务。同步或异步处理`remoting`递交的`RpcReqest`，以及异常过滤
   * **remoting**：提供底层通信所需的协议，序列化，压缩等
-
+  >命名参考了 Dubbo，但是具体含义不能完全等同
 ---
 
 ### 调用流程图
